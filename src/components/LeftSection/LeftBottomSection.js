@@ -11,7 +11,7 @@ import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import Slider from '../Slider';
 import { connect } from 'react-redux';
 
-const LeftBottomSection = ({ gifs }) => {
+const LeftBottomSection = ({ gif }) => {
   const classes = useStyles();
 
   return (
@@ -19,13 +19,13 @@ const LeftBottomSection = ({ gifs }) => {
       <Typography variant="h6" gutterBottom>Your Result</Typography>
       <Container maxWidth="sm">
         <Typography align="center" color="textPrimary" gutterBottom>
-          {gifs.length ? gifs[0].title : 'Search for a GIF'}
+          {gif.title ? gif.title : 'Search for a GIF'}
         </Typography>
         <Card className={classes.card}>
           <CardMedia
             className={classes.cardMedia}
-            image={gifs.length ? gifs[0].images.downsized.url : ''}
-            title={gifs.length ? gifs[0].title : 'Search for a GIF'}
+            image={gif.title ? gif.images.downsized.url : ''}
+            title={gif.title ? gif.title : 'Search for a GIF'}
           />
           <CardActions className={classes.cardButton}>
             <Button variant="contained" color="primary">
@@ -40,6 +40,6 @@ const LeftBottomSection = ({ gifs }) => {
   )
 }
 
-const mapStateToProps = state => state.gifs;
+const mapStateToProps = state => state.gif;
 
 export default connect(mapStateToProps)(LeftBottomSection);

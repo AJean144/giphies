@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
-import gifsReducer from './gifsReducer';
+import gifReducer from './gifReducer';
+import queryReducer from './queryReducer';
 
 export default combineReducers({
-    gifs: gifsReducer
+    gif: gifReducer,
+    query: queryReducer,
 });

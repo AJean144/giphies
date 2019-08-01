@@ -1,1 +1,2 @@
-export const FETCH_GIFS = 'FETCH_GIFS';
+export const FETCH_GIF = 'FETCH_GIF';
+export const UPDATE_QUERY_STATE = 'UPDATE_QUERY_STATE';

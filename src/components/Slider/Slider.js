@@ -3,13 +3,18 @@ import useStyles from './styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
+import { fetchGif } from '../../actions/gifsActions';
+import { connect } from 'react-redux';
 
-const SliderComponent = () => {
+const SliderComponent = ({ queryState, fetchGif }) => {
   const [value, setValue] = useState(0);
   const classes = useStyles();
 
   const handleSliderChange = (event, newValue) => {
-    setValue(newValue);
+    if (value !== newValue) {
+      setValue(newValue);
+      fetchGif(queryState, newValue);
+    }
   };
 
   return (
@@ -31,4 +36,6 @@ const SliderComponent = () => {
   );
 }
 
-export default SliderComponent;
+const mapStateToProps = state => ({ queryState: state.query.queryState });
+
+export default connect(mapStateToProps, { fetchGif })(SliderComponent);
