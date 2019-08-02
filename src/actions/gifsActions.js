@@ -4,7 +4,8 @@ import {
   LIKE_GIF,
   UNLIKE_GIF,
   SUCCESS_NOTIFICATION,
-  CLEAR_CURRENT_GIF
+  CLEAR_CURRENT_GIF,
+  START_OVER,
 } from './types';
 import { getWeirdnessApi } from '../api.js';
 import axios from 'axios';
@@ -51,3 +52,10 @@ export const notify = message => dispatch => {
 }
 
 export const clearCurrentGifState = () => dispatch => dispatch({ type: CLEAR_CURRENT_GIF })
+
+export const handleStartOver = () => dispatch => {
+  localStorage.clear();
+  dispatch({
+    type: START_OVER
+  })
+};

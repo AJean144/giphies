@@ -1,19 +1,19 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Header from './Header';
-import Grid from '@material-ui/core/Grid';
-import LeftSection from './LeftSection';
-import RightSection from './RightSection';
+import Main from './Main';
+import Results from './Results';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 const App = () => (
-  <>
+  <Router>
     <CssBaseline />
     <Header />
-    <Grid container>
-      <LeftSection />
-      <RightSection />
-    </Grid>
-  </>
+    <Switch>
+      <Route path='/' component={Main} exact />
+      <Route path='/results' component={Results} />
+    </Switch>
+  </Router>
 )
 
 export default App;

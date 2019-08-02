@@ -1,4 +1,4 @@
-import { FETCH_GIF, CLEAR_CURRENT_GIF } from '../actions/types';
+import { FETCH_GIF, CLEAR_CURRENT_GIF, START_OVER } from '../actions/types';
 import { resetCurrentGifFromLocalStorage } from '../utils/helpers';
 
 const initState = {
@@ -20,6 +20,12 @@ const gifReducer = (state = initState, action) => {
         ...state,
         gif: {},
         weirdnessLevel: 0
+      }
+    case START_OVER:
+      return {
+        ...state,
+        gif: {},
+        weirdnessLevel: 0,
       }
     default:
       return state;

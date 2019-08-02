@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
 import { handleUnlike } from '../../actions/gifsActions';
+import { Link } from 'react-router-dom';
 
 const RightBottomSection = ({ likedGifs, handleUnlike, searchTerms }) => {
   const classes = useStyles();
@@ -63,9 +64,11 @@ const RightBottomSection = ({ likedGifs, handleUnlike, searchTerms }) => {
         </Grid>
       </Container>
       <Grid container direction="row" justify="center" alignItems="center">
-        <Button variant="contained" color="primary" disabled={allLikedGifsDisplay.length !== 5}>
-          Calculate My Weirdness Score
-      </Button>
+        <Link to='/results'>
+          <Button variant="contained" color="primary" disabled={allLikedGifsDisplay.length !== 5}>
+            Calculate My Weirdness Score
+          </Button>
+        </Link>
         {(allLikedGifsDisplay.length !== 5) && getHowManyLeft(allLikedGifsDisplay.length)}
       </Grid>
     </>

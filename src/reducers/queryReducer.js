@@ -1,4 +1,4 @@
-import { UPDATE_QUERY_STATE } from '../actions/types';
+import { UPDATE_QUERY_STATE, START_OVER } from '../actions/types';
 
 const initState = {
   queryState: '',
@@ -10,6 +10,12 @@ const queryReducer = (state = initState, action) => {
       return {
         ...state,
         queryState: action.queryState,
+      }
+
+    case START_OVER:
+      return {
+        ...state,
+        queryState: ''
       }
     default:
       return state;

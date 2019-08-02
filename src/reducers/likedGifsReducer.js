@@ -1,4 +1,4 @@
-import { LIKE_GIF, UNLIKE_GIF } from '../actions/types';
+import { LIKE_GIF, UNLIKE_GIF, START_OVER } from '../actions/types';
 import { loadFromLocalStorage, convertToSnakeCase } from '../utils/helpers';
 
 const initState = {
@@ -63,6 +63,14 @@ const likedGifReducer = (state = initState, action) => {
         notificationType: unlikeNotificationType,
         notificationState: unlikeNotificationState,
         notificationMessage: unlikeNotificationMessage
+      }
+
+    case START_OVER:
+      return {
+        ...state,
+        likedGifs: {},
+        searchTerms: {},
+        notificationState: false,
       }
     default:
       return state;
