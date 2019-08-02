@@ -10,9 +10,21 @@ import Button from '@material-ui/core/Button';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import Slider from '../Slider';
 import { connect } from 'react-redux';
+import { likeGif, notify, clearCurrentGifState } from '../../actions/gifsActions';
+import Notification from '../Notification';
 
-const LeftBottomSection = ({ gif }) => {
+const LeftBottomSection = ({ gif, likeGif, notify, weirdnessLevel, clearCurrentGifState }) => {
   const classes = useStyles();
+
+  const handleLike = () => {
+    likeGif(gif, weirdnessLevel)
+
+    setTimeout(() => {
+      clearCurrentGifState()
+      likeGif(gif, weirdnessLevel)
+    }, 3000)
+    notify(true, 'success')
+  }
 
   return (
     <Grid className={classes.leftBottomSection}>
@@ -28,8 +40,9 @@ const LeftBottomSection = ({ gif }) => {
             title={gif.title ? gif.title : 'Search for a GIF'}
           />
           <CardActions className={classes.cardButton}>
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary" onClick={handleLike} disabled={!gif.title}>
               <ThumbUpIcon className={classes.rightIcon} />
+              <Notification />
             </Button>
           </CardActions>
         </Card>
@@ -40,6 +53,11 @@ const LeftBottomSection = ({ gif }) => {
   )
 }
 
-const mapStateToProps = state => state.gif;
+const mapStateToProps = state => {
+  return {
+    ...state.gif,
+    weirdnessLevel: state.gif.weirdnessLevel,
+  }
+};
 
-export default connect(mapStateToProps)(LeftBottomSection);
+export default connect(mapStateToProps, { likeGif, notify, clearCurrentGifState })(LeftBottomSection);

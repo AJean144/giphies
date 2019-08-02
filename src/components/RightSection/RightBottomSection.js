@@ -27,7 +27,7 @@ const RightBottomSection = () => {
                 />
                 <CardActions className={classes.cardButton}>
                   <Button variant="contained" color="primary">
-                    Remove
+                    Unlike
                 </Button>
                 </CardActions>
               </Card>

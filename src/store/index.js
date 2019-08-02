@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from '../reducers';
-import { saveToLocalStorage, loadFromLocalStorage } from '../utils/helpers';
+import { saveToLocalStorage, loadFromLocalStorage, resetCurrentGifFromLocalStorage } from '../utils/helpers';
 
 const middleWare = [thunk];
 
@@ -16,6 +16,8 @@ const store = createStore(
   ),
 );
 
-store.subscribe(() => saveToLocalStorage(store.getState()));
+store.subscribe(() => {
+  return [saveToLocalStorage(store.getState()), resetCurrentGifFromLocalStorage()]
+});
 
 export default store;
