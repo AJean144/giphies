@@ -7,12 +7,7 @@ import {
 
 const initState = {
   notificationType: '',
-  notificationState: false,
   notificationMessage: '',
-  gif: {},
-  queryState: '',
-  newSearchTerm: '',
-  weirdnessLevel: 0,
 }
 
 const notificationReducer = (state = initState, action) => {
@@ -21,29 +16,25 @@ const notificationReducer = (state = initState, action) => {
       return {
         ...state,
         notificationType: 'success',
-        notificationState: action.notificationState,
-        notificationMessage: 'Nice! Choose another search term',
+        notificationMessage: action.message,
       }
     case ERROR_NOTIFICATION:
       return {
         ...state,
         notificationType: 'error',
-        notificationState: action.notificationState,
-        notificationMessage: 'Select a new search term',
+        notificationMessage: action.message,
       }
     case WARNING_NOTIFICATION:
       return {
         ...state,
         notificationType: 'warning',
-        notificationState: action.notificationState,
-        notificationMessage: 'Warning',
+        notificationMessage: action.message,
       }
     case INFO_NOTIFICATION:
       return {
         ...state,
         notificationType: 'info',
-        notificationState: action.notificationState,
-        notificationMessage: 'Submit a new search term',
+        notificationMessage: action.message,
       }
     default:
       return state;

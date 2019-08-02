@@ -23,7 +23,7 @@ const LeftBottomSection = ({ gif, likeGif, notify, weirdnessLevel, clearCurrentG
       clearCurrentGifState()
       likeGif(gif, weirdnessLevel)
     }, 3000)
-    notify(true, 'success')
+    notify('success', 'Thanks for the like! Choose another search term')
   }
 
   return (
@@ -33,22 +33,24 @@ const LeftBottomSection = ({ gif, likeGif, notify, weirdnessLevel, clearCurrentG
         <Typography align="center" color="textPrimary" gutterBottom>
           {gif.title ? gif.title : 'Search for a GIF'}
         </Typography>
-        <Card className={classes.card}>
-          <CardMedia
-            className={classes.cardMedia}
-            image={gif.title ? gif.images.downsized.url : ''}
-            title={gif.title ? gif.title : 'Search for a GIF'}
-          />
-          <CardActions className={classes.cardButton}>
-            <Button variant="contained" color="primary" onClick={handleLike} disabled={!gif.title}>
-              <ThumbUpIcon className={classes.rightIcon} />
-              <Notification />
-            </Button>
-          </CardActions>
-        </Card>
+        {gif.title && (
+          <Card className={classes.card}>
+            <CardMedia
+              className={classes.cardMedia}
+              image={gif.title ? gif.images.downsized.url : ''}
+              title={gif.title ? gif.title : 'Search for a GIF'}
+            />
+            <CardActions className={classes.cardButton}>
+              <Button variant="contained" color="primary" onClick={handleLike} disabled={!gif.title}>
+                <ThumbUpIcon className={classes.rightIcon} />
+                <Notification />
+              </Button>
+            </CardActions>
+          </Card>
+        )}
       </Container>
       <br />
-      <Slider />
+      {gif.title && <Slider />}
     </Grid>
   )
 }

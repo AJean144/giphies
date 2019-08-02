@@ -2,10 +2,8 @@ import {
   FETCH_GIF,
   UPDATE_QUERY_STATE,
   LIKE_GIF,
+  UNLIKE_GIF,
   SUCCESS_NOTIFICATION,
-  ERROR_NOTIFICATION,
-  WARNING_NOTIFICATION,
-  INFO_NOTIFICATION,
   CLEAR_CURRENT_GIF
 } from './types';
 import { getWeirdnessApi } from '../api.js';
@@ -38,35 +36,18 @@ export const likeGif = (likedGif, weirdnessLevel) => dispatch => {
   })
 }
 
-export const notify = (notificationState, notificationType) => dispatch => {
-  switch (notificationType) {
-    case 'success':
-      dispatch({
-        type: SUCCESS_NOTIFICATION,
-        notificationState,
-      })
-      break;
-    case 'error':
-      dispatch({
-        type: ERROR_NOTIFICATION,
-        notificationState,
-      })
-      break;
-    case 'warning':
-      dispatch({
-        type: WARNING_NOTIFICATION,
-        notificationState,
-      })
-      break;
-    case 'info':
-      dispatch({
-        type: INFO_NOTIFICATION,
-        notificationState,
-      })
-      break;
-    default:
-      return;
-  }
+export const handleUnlike = gifId => dispatch => {
+  dispatch({
+    type: UNLIKE_GIF,
+    gifId,
+  })
+}
+
+export const notify = message => dispatch => {
+  dispatch({
+    type: SUCCESS_NOTIFICATION,
+    message,
+  })
 }
 
 export const clearCurrentGifState = () => dispatch => dispatch({ type: CLEAR_CURRENT_GIF })

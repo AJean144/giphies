@@ -4,12 +4,14 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
+import { handleUnlike } from '../../actions/gifsActions';
 
-const RightBottomSection = ({ likedGifs }) => {
+const RightBottomSection = ({ likedGifs, handleUnlike, searchTerms }) => {
   const classes = useStyles();
 
   const getHowManyLeft = (gifsLength) => {
@@ -32,13 +34,24 @@ const RightBottomSection = ({ likedGifs }) => {
             image={likedGifs[key].id ? likedGifs[key].images.downsized.url : ''}
             title={likedGifs[key].title ? likedGifs[key].title : 'Search for a GIF'}
           />
+          <CardContent className={classes.cardContent}>
+            <Typography gutterBottom variant="h6" component="h2" align='center'>
+              Search Term: {likedGifs[key].searchTerm}
+            </Typography>
+            <Typography align='center'>
+              Weirdness Level: {likedGifs[key].weirdnessLevel}
+            </Typography>
+          </CardContent>
           <CardActions className={classes.cardButton}>
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary" onClick={() => {
+              handleUnlike(likedGifs[key].id)
+              setTimeout(() => handleUnlike(likedGifs[key].id), 3000)
+            }}>
               Unlike
-        </Button>
+            </Button>
           </CardActions>
         </Card>
-      </Grid>
+      </Grid >
     )
   }
 
@@ -50,10 +63,10 @@ const RightBottomSection = ({ likedGifs }) => {
         </Grid>
       </Container>
       <Grid container direction="row" justify="center" alignItems="center">
-        <Button variant="contained" color="primary">
+        <Button variant="contained" color="primary" disabled={allLikedGifsDisplay.length !== 5}>
           Calculate My Weirdness Score
       </Button>
-        {getHowManyLeft(allLikedGifsDisplay.length)}
+        {(allLikedGifsDisplay.length !== 5) && getHowManyLeft(allLikedGifsDisplay.length)}
       </Grid>
     </>
   )
@@ -63,8 +76,9 @@ const mapStateToProps = state => {
   const { likedGifs } = state;
 
   return {
-    likedGifs: likedGifs.likedGifs
+    likedGifs: likedGifs.likedGifs,
+    searchTerms: likedGifs.searchTerms,
   }
 }
 
-export default connect(mapStateToProps)(RightBottomSection);
+export default connect(mapStateToProps, { handleUnlike })(RightBottomSection);
