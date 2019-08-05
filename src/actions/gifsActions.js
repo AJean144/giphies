@@ -7,7 +7,7 @@ import {
   CLEAR_CURRENT_GIF,
   START_OVER,
 } from './types';
-import { getWeirdnessApi } from '../api.js';
+import { getWeirdnessApi } from '../api';
 import axios from 'axios';
 
 export const fetchGif = (queryState, weirdnessLevel) => dispatch => {
