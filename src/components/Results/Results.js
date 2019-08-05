@@ -63,9 +63,11 @@ const Results = ({ likedGifs, handleStartOver }) => {
         <Grid className={classes.buttons}>
           <Grid container spacing={2} justify="center">
             <Grid item>
-              <Button variant="contained" color="primary" onClick={handleStartOver}>
-                <Link to='/' className={classes.removeLinkUnderline}>Start Over</Link>
+              <Link to='/' className={classes.removeLinkUnderline}>
+                <Button variant="contained" color="primary" onClick={handleStartOver}>
+                  Start Over
               </Button>
+              </Link>
             </Grid>
           </Grid>
         </Grid>

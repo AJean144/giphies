@@ -5,7 +5,7 @@ const useStyles = makeStyles({
     padding: '2px 4px',
     display: 'flex',
     alignItems: 'center',
-    width: 400,
+    width: 320,
   },
   input: {
     marginLeft: 8,

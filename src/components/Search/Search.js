@@ -63,7 +63,7 @@ const Search = ({
         />
       </Paper>
       {notificationState && <Typography className={classes.errorText}>{notificationMessage}</Typography>}
-      {isLikedGifsAmount5 && <Typography className={classes.successText}>You may now calculate your weirdness score!</Typography>}
+      {isLikedGifsAmount5 && <Typography className={classes.successText}>Calculate your weirdness score!</Typography>}
     </Grid>
   );
 }
