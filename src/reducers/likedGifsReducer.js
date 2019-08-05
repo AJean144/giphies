@@ -4,7 +4,9 @@ import { loadFromLocalStorage, convertToSnakeCase } from '../utils/helpers';
 const initState = {
   likedGifs: {},
   searchTerms: {},
+  notificationType: '',
   notificationState: false,
+  notificationMessage: '',
 }
 
 const likedGifReducer = (state = initState, action) => {
@@ -18,12 +20,12 @@ const likedGifReducer = (state = initState, action) => {
       let notificationState = false;
       let notificationMessage = '';
       if (!persistedLikedGifs.hasOwnProperty(action.likedGif.id) && !persistedSearchTerms.hasOwnProperty(convertToSnakeCase(searchTerm))) {
+        notificationState = true;
+        notificationMessage = 'Thanks for the like! Choose another search term'
         persistedLikedGifs[action.likedGif.id] = { ...action.likedGif, weirdnessLevel: action.weirdnessLevel, searchTerm: convertToSnakeCase(searchTerm) };
 
         const searchTermKey = convertToSnakeCase(searchTerm);
         persistedSearchTerms[searchTermKey] = searchTerm;
-        notificationState = true;
-        notificationMessage = 'Thanks for the like! Choose another search term'
       }
 
       return {
@@ -44,16 +46,16 @@ const likedGifReducer = (state = initState, action) => {
         oldSearchTerm = currentLikedGifs[action.gifId].searchTerm;
       }
 
-      let unlikeNotificationType = 'info';
+      let unlikeNotificationType = 'success';
       let unlikeNotificationState = false;
       let unlikeNotificationMessage = '';
       if (currentLikedGifs.hasOwnProperty(action.gifId) && currentSearchTerms.hasOwnProperty(convertToSnakeCase(oldSearchTerm))) {
-        delete currentLikedGifs[action.gifId]
-
-        const oldSearchTermKey = convertToSnakeCase(oldSearchTerm);
-        delete currentSearchTerms[oldSearchTermKey];
         unlikeNotificationState = true;
         unlikeNotificationMessage = "You don't like me anymore?"
+
+        const oldSearchTermKey = convertToSnakeCase(oldSearchTerm);
+        delete currentLikedGifs[action.gifId]
+        delete currentSearchTerms[oldSearchTermKey];
       }
 
       return {
@@ -70,8 +72,11 @@ const likedGifReducer = (state = initState, action) => {
         ...state,
         likedGifs: {},
         searchTerms: {},
+        notificationType: '',
         notificationState: false,
+        notificationMessage: ''
       }
+
     default:
       return state;
   }

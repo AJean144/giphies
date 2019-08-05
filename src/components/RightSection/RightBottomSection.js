@@ -64,11 +64,9 @@ const RightBottomSection = ({ likedGifs, handleUnlike, searchTerms }) => {
         </Grid>
       </Container>
       <Grid container direction="row" justify="center" alignItems="center">
-        <Link to='/results'>
-          <Button variant="contained" color="primary" disabled={allLikedGifsDisplay.length !== 5}>
-            Calculate My Weirdness Score
-          </Button>
-        </Link>
+        <Button variant="contained" color="primary" disabled={allLikedGifsDisplay.length !== 5}>
+          <Link to='/results' className={classes.removeLinkUnderline}>Calculate My Weirdness Score</Link>
+        </Button>
         {(allLikedGifsDisplay.length !== 5) && getHowManyLeft(allLikedGifsDisplay.length)}
       </Grid>
     </>

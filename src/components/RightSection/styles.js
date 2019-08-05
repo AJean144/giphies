@@ -30,6 +30,10 @@ const useStyles = makeStyles(theme => ({
   youMustMessage: {
     color: '#AE4345',
     marginTop: 16
+  },
+  removeLinkUnderline: {
+    textDecoration: 'none',
+    color: '#ffffff'
   }
 }));
 

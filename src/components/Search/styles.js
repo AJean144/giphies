@@ -19,6 +19,12 @@ const useStyles = makeStyles({
     height: 28,
     margin: 4,
   },
+  errorText: {
+    color: '#d3382f'
+  },
+  successText: {
+    color: '#51a048'
+  }
 });
 
 export default useStyles;

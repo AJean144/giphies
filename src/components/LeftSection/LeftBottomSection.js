@@ -10,10 +10,9 @@ import Button from '@material-ui/core/Button';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import Slider from '../Slider';
 import { connect } from 'react-redux';
-import { likeGif, notify, clearCurrentGifState } from '../../actions/gifsActions';
-import Notification from '../Notification';
+import { likeGif, clearCurrentGifState } from '../../actions/gifsActions';
 
-const LeftBottomSection = ({ gif, likeGif, notify, weirdnessLevel, clearCurrentGifState }) => {
+const LeftBottomSection = ({ gif, likeGif, weirdnessLevel, clearCurrentGifState }) => {
   const classes = useStyles();
 
   const handleLike = () => {
@@ -23,7 +22,6 @@ const LeftBottomSection = ({ gif, likeGif, notify, weirdnessLevel, clearCurrentG
       clearCurrentGifState()
       likeGif(gif, weirdnessLevel)
     }, 3000)
-    notify('success', 'Thanks for the like! Choose another search term')
   }
 
   return (
@@ -43,7 +41,6 @@ const LeftBottomSection = ({ gif, likeGif, notify, weirdnessLevel, clearCurrentG
             <CardActions className={classes.cardButton}>
               <Button variant="contained" color="primary" onClick={handleLike} disabled={!gif.title}>
                 <ThumbUpIcon className={classes.rightIcon} />
-                <Notification />
               </Button>
             </CardActions>
           </Card>
@@ -62,4 +59,4 @@ const mapStateToProps = state => {
   }
 };
 
-export default connect(mapStateToProps, { likeGif, notify, clearCurrentGifState })(LeftBottomSection);
+export default connect(mapStateToProps, { likeGif, clearCurrentGifState })(LeftBottomSection);
